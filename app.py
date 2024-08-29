@@ -1,5 +1,5 @@
 ﻿import streamlit as st
-import pyperclip
+import streamlit.components.v1 as components
 
 # Function to apply unicode formatting
 def apply_unicode_formatting(text, bold, italic, underline, strikethrough):
@@ -27,7 +27,24 @@ formatted_text = apply_unicode_formatting(text, bold, italic, underline=False, s
 # Display formatted text
 st.text_area("Formatted text (copy this):", formatted_text, height=150)
 
-# Copy text button
-if st.button("Copy Text"):
-    pyperclip.copy(formatted_text)
-    st.success("Text copied to clipboard!")
+# JavaScript code to copy text
+copy_js = """
+<script>
+function copyText() {
+    var copyText = document.getElementById("formatted-text");
+    navigator.clipboard.writeText(copyText.innerText).then(function() {
+        alert("Text copied to clipboard!");
+    }, function(err) {
+        alert("Failed to copy text: " + err);
+    });
+}
+document.getElementById("copy-button").addEventListener("click", copyText);
+</script>
+"""
+
+# Display copy button
+components.html(f"""
+    <button id="copy-button">Copy Text</button>
+    <div id="formatted-text" style="display: none;">{formatted_text}</div>
+    {copy_js}
+""")
