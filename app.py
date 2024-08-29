@@ -1,4 +1,5 @@
 ﻿import streamlit as st
+import pyperclip
 
 st.title("LinkedIn Text Formatter")
 
@@ -22,9 +23,9 @@ st.markdown(formatted_text)
 
 # Copy text button
 if st.button("Copy Text"):
-    st.write("Text copied to clipboard!")  # You might need additional code to handle clipboard copying
+    pyperclip.copy(formatted_text)
+    st.success("Text copied to clipboard!")
 
 # Clear button
 if st.button("Clear"):
-    st.text_area("Enter your text here:", value="", key="clear")
-    st.write("")
+    st.experimental_rerun()
