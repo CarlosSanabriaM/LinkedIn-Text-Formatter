@@ -1,5 +1,5 @@
 ﻿import streamlit as st
-import pyperclip  # To handle the copying of text
+import clipboard  # To handle the copying of text
 
 # Function to apply unicode formatting
 def apply_unicode_formatting(text, bold, italic, strikethrough):
@@ -29,11 +29,10 @@ st.text_area("Formatted text (copy this):", formatted_text, height=150)
 
 # Button to copy text
 if st.button("Copy Text"):
-    pyperclip.copy(formatted_text)
+    clipboard.copy(formatted_text)
     st.success("Text copied to clipboard!")
 
 # Button to clear text
 if st.button("Clear"):
     st.text_area("Enter your text here:", height=150, value="")
     st.text_area("Formatted text (copy this):", height=150, value="")
-
