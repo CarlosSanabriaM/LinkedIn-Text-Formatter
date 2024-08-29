@@ -1,31 +1,27 @@
 ﻿import streamlit as st
-import pyperclip
 
+# Function to apply unicode formatting
+def apply_unicode_formatting(text, bold, italic, underline, strikethrough):
+    if bold:
+        text = ''.join([chr(ord('𝐀') + (ord(c) - ord('A'))) if 'A' <= c <= 'Z' else chr(ord('𝐚') + (ord(c) - ord('a'))) if 'a' <= c <= 'z' else c for c in text])
+    if italic:
+        text = ''.join([chr(ord('𝑨') + (ord(c) - ord('A'))) if 'A' <= c <= 'Z' else chr(ord('𝒂') + (ord(c) - ord('a'))) if 'a' <= c <= 'z' else c for c in text])
+    if strikethrough:
+        text = ''.join([c + '\u0336' for c in text])
+    return text
+
+# Streamlit app layout
 st.title("LinkedIn Text Formatter")
 
-# Input text area
-input_text = st.text_area("Enter your text here:")
+text = st.text_area("Enter your text here:", height=150)
 
-# Formatting options
+# Checkbox options for formatting
 bold = st.checkbox("Bold")
 italic = st.checkbox("Italic")
+strikethrough = st.checkbox("Strikethrough")
 
-# Format the text based on options
-formatted_text = input_text
-if bold:
-    formatted_text = f"**{formatted_text}**"
-if italic:
-    formatted_text = f"*{formatted_text}*"
+# Apply formatting
+formatted_text = apply_unicode_formatting(text, bold, italic, underline=False, strikethrough=strikethrough)
 
 # Display formatted text
-st.subheader("Formatted Text Preview")
-st.markdown(formatted_text)
-
-# Copy text button
-if st.button("Copy Text"):
-    pyperclip.copy(formatted_text)
-    st.success("Text copied to clipboard!")
-
-# Clear button
-if st.button("Clear"):
-    st.experimental_rerun()
+st.text_area("Formatted text (copy this):", formatted_text, height=150)
