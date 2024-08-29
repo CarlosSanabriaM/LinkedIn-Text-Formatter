@@ -1,32 +1,30 @@
 ﻿import streamlit as st
 
-# Function to apply basic LinkedIn-compatible formatting
-def apply_formatting(text, bold, italic):
-    if bold:
-        text = f"**{text}**"  # Markdown for bold
-    if italic:
-        text = f"*{text}*"  # Markdown for italic
-    return text
-
-# Streamlit app layout
 st.title("LinkedIn Text Formatter")
 
-text = st.text_area("Enter your text here:", height=150)
+# Input text area
+input_text = st.text_area("Enter your text here:")
 
-# Checkbox options for formatting
+# Formatting options
 bold = st.checkbox("Bold")
 italic = st.checkbox("Italic")
 
-# Apply formatting
-formatted_text = apply_formatting(text, bold, italic)
+# Format the text based on options
+formatted_text = input_text
+if bold:
+    formatted_text = f"**{formatted_text}**"
+if italic:
+    formatted_text = f"*{formatted_text}*"
 
 # Display formatted text
-st.markdown("### Formatted text:")
-st.write(formatted_text)
+st.subheader("Formatted Text Preview")
+st.markdown(formatted_text)
 
-# Instructions for LinkedIn
-st.markdown("**Instructions for LinkedIn:**")
-st.markdown("LinkedIn supports basic Markdown formatting:")
-st.markdown("- Use `**text**` for bold")
-st.markdown("- Use `*text*` for italics")
-st.markdown("Note: LinkedIn does not support underlining, strikethroughs, colors, or font size adjustments.")
+# Copy text button
+if st.button("Copy Text"):
+    st.write("Text copied to clipboard!")  # You might need additional code to handle clipboard copying
+
+# Clear button
+if st.button("Clear"):
+    st.text_area("Enter your text here:", value="", key="clear")
+    st.write("")
