@@ -1,4 +1,5 @@
 ﻿import streamlit as st
+import pyperclip
 
 # Function to apply unicode formatting
 def apply_unicode_formatting(text, bold, italic, underline, strikethrough):
@@ -25,3 +26,8 @@ formatted_text = apply_unicode_formatting(text, bold, italic, underline=False, s
 
 # Display formatted text
 st.text_area("Formatted text (copy this):", formatted_text, height=150)
+
+# Copy text button
+if st.button("Copy Text"):
+    pyperclip.copy(formatted_text)
+    st.success("Text copied to clipboard!")
