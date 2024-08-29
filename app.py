@@ -33,18 +33,18 @@ copy_js = """
 function copyText() {
     var copyText = document.getElementById("formatted-text");
     navigator.clipboard.writeText(copyText.innerText).then(function() {
-        alert("Text copied to clipboard!");
+        // Optionally: alert("Text copied to clipboard!");
     }, function(err) {
-        alert("Failed to copy text: " + err);
+        // Optionally: alert("Failed to copy text: " + err);
     });
 }
 document.getElementById("copy-button").addEventListener("click", copyText);
 </script>
 """
 
-# Display copy button
+# Display copy button and JavaScript
 components.html(f"""
     <button id="copy-button">Copy Text</button>
     <div id="formatted-text" style="display: none;">{formatted_text}</div>
     {copy_js}
-""")
+""", height=100)
