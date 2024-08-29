@@ -13,7 +13,7 @@ def apply_unicode_formatting(text, bold, italic, underline, strikethrough):
 
 # Streamlit app layout
 st.title("LinkedIn Text Formatter")
-ext = st.text_area("Developed By: Irfan Ullah Khan")
+ext = st.text("Developed By: Irfan Ullah Khan")
 
 text = st.text_area("Enter your text here:", height=150)
 
