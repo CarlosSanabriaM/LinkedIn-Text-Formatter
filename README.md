@@ -1,5 +1,7 @@
 # LinkedIn Text Formatter
 
+<img src="docs/images/usage-example.png" alt="Usage example" width="600">
+
 ## Overview
 
 The LinkedIn Text Formatter is a Streamlit-based web application that allows users to format their text with various Unicode styles.
